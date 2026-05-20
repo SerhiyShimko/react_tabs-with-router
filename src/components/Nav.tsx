@@ -1,6 +1,9 @@
-import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const Nav = () => {
+  const loc = useLocation();
+
   return (
     <nav
       className="navbar is-light is-fixed-top is-mobile has-shadow"

@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
+import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 const tabs = [
   { id: 'tab-1', title: 'Tab 1', content: 'Some text 1' },
@@ -8,34 +10,35 @@ const tabs = [
 ];
 
 export const TabsPage = () => {
-  const { tabId = 0 } = useParams();
+  const { tabId = '' } = useParams();
 
-  const activeTab = tabs.filter(tab => tab.id === tabId)[0];
+  const activeTab = tabs.findIndex(tab => tab.title === tabId);
 
   return (
     <div className="section">
       <div className="container">
         <h1 className="title">Tabs page</h1>
 
-        <div className="tabs is-boxed">
-          <ul>
-            {tabs.map(tab => (
-              <li
-                data-cy="Tab"
-                className={classNames({
-                  'is-active': activeTab && tab.id === activeTab.id,
-                })}
-                key={tab.id}
-              >
-                <Link to={`/tabs/${tab.id}`}>{tab.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Tabs selectedIndex={activeTab}>
+          <TabList>
+            {tabs.map(tab => {
+              return (
+                <Tab key={tab.id}>
+                  <Link to={`/tabs/${tab.title}`}>{tab.title}</Link>
+                </Tab>
+              );
+            })}
+          </TabList>
 
-        <div className="block" data-cy="TabContent">
-          {activeTab ? activeTab.content : 'Please select a tab'}
-        </div>
+          {tabs.map(tab => {
+            return <TabPanel key={tab.id}>{tab.content}</TabPanel>;
+          })}
+          {activeTab < 0 && (
+            <div className="block" data-cy="TabContent">
+              {'Please select a tab'}
+            </div>
+          )}
+        </Tabs>
       </div>
     </div>
   );
