@@ -22,7 +22,7 @@ export const TabsPage = () => {
           <TabList>
             {tabs.map(tab => {
               return (
-                <Tab key={tab.id}>
+                <Tab data-cy="Tab" key={tab.id}>
                   <Link to={`/tabs/${tab.id}`}>{tab.title}</Link>
                 </Tab>
               );
