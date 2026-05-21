@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Nav = () => {
   const loc = useLocation();
@@ -11,22 +11,22 @@ export const Nav = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
+          <Link
             to="/"
-            className={({ isActive }) =>
-              isActive ? 'navbar-item is-active' : 'navbar-item'
-            }
+            className={classNames('navbar-item', {
+              'is-active': loc.pathname === '/',
+            })}
           >
             Home
-          </NavLink>
-          <NavLink
+          </Link>
+          <Link
             to="tabs"
-            className={({ isActive }) =>
-              isActive ? 'navbar-item is-active' : 'navbar-item'
-            }
+            className={classNames('navbar-item', {
+              'is-active': loc.pathname.includes('tabs'),
+            })}
           >
             Tabs
-          </NavLink>
+          </Link>
         </div>
       </div>
     </nav>

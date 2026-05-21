@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -12,7 +11,7 @@ const tabs = [
 export const TabsPage = () => {
   const { tabId = '' } = useParams();
 
-  const activeTab = tabs.findIndex(tab => tab.title === tabId);
+  const activeTab = tabs.findIndex(tab => tab.id === tabId);
 
   return (
     <div className="section">
@@ -24,7 +23,7 @@ export const TabsPage = () => {
             {tabs.map(tab => {
               return (
                 <Tab key={tab.id}>
-                  <Link to={`/tabs/${tab.title}`}>{tab.title}</Link>
+                  <Link to={`/tabs/${tab.id}`}>{tab.title}</Link>
                 </Tab>
               );
             })}
